@@ -1,0 +1,35 @@
+========== member 테이블 ==========================================
+
+CREATE TABLE `assignment`.`member` (
+  `member_id` INT NOT NULL AUTO_INCREMENT,
+  `member_email` VARCHAR(30) NOT NULL,
+  `member_pw` VARCHAR(300) NOT NULL,
+  `member_role` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`member_id`),
+  UNIQUE INDEX `member_email_UNIQUE` (`member_email` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+=================================================================
+
+
+========== consumption 테이블 ==========================================
+
+CREATE TABLE `assignment`.`consumption` (
+  `consumption_id` INT NOT NULL AUTO_INCREMENT,
+  `consumption_date` DATE NOT NULL,
+  `consumption_price` INT NOT NULL,
+  `consumption_memo` VARCHAR(255) NOT NULL,
+  `consumption_delete` VARCHAR(1) NOT NULL,
+  `member_id` INT NOT NULL,
+  PRIMARY KEY (`consumption_id`),
+  INDEX `con_member_id_idx` (`member_id` ASC),
+  CONSTRAINT `con_member_id`
+    FOREIGN KEY (`member_id`)
+    REFERENCES `assignment`.`member` (`member_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+=================================================================
